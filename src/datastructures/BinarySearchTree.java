@@ -8,7 +8,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
         // TODO: Rekursiv einfügen
     }
 
-    public T find(T data) throws EnemyNotFoundException {
+    public T find(T data) {
         // TODO: Rekursiv suchen
         return null;
     }

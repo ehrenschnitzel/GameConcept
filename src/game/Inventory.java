@@ -5,7 +5,7 @@ import exceptions.InventoryFullException;
 
 import datastructures.LinkedList;
 
-public class Inventory {
+public class Inventory extends Exception {
 
     private LinkedList<Item> items;
     private static final int MAX_SIZE = 10;
