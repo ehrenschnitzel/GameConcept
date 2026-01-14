@@ -2,6 +2,8 @@ import java.util.Scanner;
 import exceptions.EnemyNotFoundException;
 import exceptions.SavegameException;
 import exceptions.InventoryFullException;
+import game.EnemyTree;
+import game.Enemy;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -9,13 +11,15 @@ public class Main {
     public static void main(String[] args) {
         boolean running = true;
         Scanner scanner = new Scanner(System.in);
+        EnemyTree enemyTree = new EnemyTree();
+        seedEnemies(enemyTree);
 
         while(running) {
             printMenu();
             int choice = scanner.nextInt();
 
             try {
-                running = handleUserChoice(choice);
+                running = handleUserChoice(choice, enemyTree);
             } catch (InventoryFullException e) {
                 System.out.println(e.getMessage());
             } catch (EnemyNotFoundException e) {
@@ -26,7 +30,7 @@ public class Main {
         }
     }
 
-    private static boolean handleUserChoice (int choice) throws InventoryFullException, EnemyNotFoundException, SavegameException {
+    private static boolean handleUserChoice (int choice, EnemyTree enemyTree) throws InventoryFullException, EnemyNotFoundException, SavegameException {
 
         switch (choice) {
             case 1:
@@ -39,6 +43,7 @@ public class Main {
 
             case 3:
                 // TODO:  Gegner anzeigen (kann EnemyNotFoundException werfen)
+                enemyTree.printEnemies();
                 return true;
 
             case 4:
@@ -47,6 +52,7 @@ public class Main {
 
             case 5:
                 //TODO: Spiel laden (kann SavegameException werfen)
+                return true;
 
             case 0:
                 return false; //beendet das Spiel
@@ -65,6 +71,21 @@ public class Main {
         System.out.println("4. Spiel speichern");
         System.out.println("5. Spiel laden");
         System.out.println("0. Spiel schließen");
+    }
+
+    public static void seedEnemies(EnemyTree enemyTree) {
+
+        Enemy a = new Enemy();
+        a.setLevel(10);
+        Enemy b = new Enemy();
+        b.setLevel(10);
+        Enemy c = new Enemy();
+        c.setLevel(5);
+
+        enemyTree.addEnemy(a);
+        enemyTree.addEnemy(b);
+        enemyTree.addEnemy(c);
+
     }
 
 }

@@ -1,7 +1,5 @@
 package datastructures;
 
-import game.Enemy;
-
 public class TreeNode<T> {
 
     public T data;

@@ -1,5 +1,8 @@
 package game;
 
+import datastructures.BinarySearchTree;
+import exceptions.SavegameException;
+
 import java.io.*;
 
 public class SavegameManager {

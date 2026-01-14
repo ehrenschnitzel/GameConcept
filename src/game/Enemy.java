@@ -1,6 +1,6 @@
 package game;
 
-public class Enemy {
+public class Enemy implements Comparable<Enemy> {
 
     private int level;
 
@@ -9,5 +9,16 @@ public class Enemy {
     }
     public int getLevel() {
         return level;
+    }
+
+    @Override
+    public int compareTo(Enemy other) {
+        return Integer.compare(this.level, other.level);
+    }
+
+    @Override
+
+    public String toString() {
+        return "Enemy(level=" + level + ")";
     }
 }

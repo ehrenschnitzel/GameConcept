@@ -1,27 +1,22 @@
 package game;
 
-import datastructures.TreeNode;
+import datastructures.BinarySearchTree;
+import exceptions.EnemyNotFoundException;
 
 public class EnemyTree {
 
-    private TreeNode root;
+    private final BinarySearchTree<Enemy> tree = new BinarySearchTree<>();
 
-    public void insert(Enemy enemy) {
-
-        root = insertRecursive(root, enemy);
+    public void addEnemy(Enemy enemy) {
+        tree.insert(enemy);
     }
 
-    private TreeNode insertRecursive(TreeNode current, Enemy enemy) {
-
-        if(current == null) {
-            return new TreeNode(enemy);
-        }
-        if (enemy.getLevel() < current.data.getLevel()) {
-            current.left = insertRecursive(current.left, enemy);
-        } else if (enemy.getLevel() > current.data.getLevel()) {
-            current.right = insertRecursive(current.right, enemy);
-        }
-
-        return current;
+    public Enemy findEnemy(Enemy enemy) throws EnemyNotFoundException {
+        return tree.find(enemy);
     }
+    public void printEnemies() {
+        tree.printInOrder();
+    }
+
+
 }
