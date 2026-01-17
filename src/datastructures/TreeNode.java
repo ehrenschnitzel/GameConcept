@@ -1,6 +1,8 @@
 package datastructures;
 
-public class TreeNode<T> {
+import java.io.Serializable;
+
+public class TreeNode<T> implements Serializable {
 
     public T data;
     public TreeNode<T> left;

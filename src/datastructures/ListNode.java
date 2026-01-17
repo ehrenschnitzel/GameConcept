@@ -1,6 +1,8 @@
 package datastructures;
 
-public class ListNode<T> {
+import java.io.Serializable;
+
+public class ListNode<T> implements Serializable {
 
     T data;
     ListNode<T> next;

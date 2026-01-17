@@ -5,7 +5,9 @@ import exceptions.InventoryFullException;
 
 import datastructures.LinkedList;
 
-public class Inventory extends Exception {
+import java.io.Serializable;
+
+public class Inventory extends Exception implements Serializable {
 
     private LinkedList<Item> items;
     private static final int MAX_SIZE = 10;

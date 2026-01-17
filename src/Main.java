@@ -2,8 +2,7 @@ import java.util.Scanner;
 import exceptions.EnemyNotFoundException;
 import exceptions.SavegameException;
 import exceptions.InventoryFullException;
-import game.EnemyTree;
-import game.Enemy;
+import game.*;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -13,13 +12,16 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         EnemyTree enemyTree = new EnemyTree();
         seedEnemies(enemyTree);
+        Player player = null;
+        Inventory inventory = new Inventory();
+        GameState state = new GameState(player, inventory, enemyTree);
 
         while(running) {
             printMenu();
             int choice = scanner.nextInt();
 
             try {
-                running = handleUserChoice(choice, enemyTree);
+                running = handleUserChoice(choice, state);
             } catch (InventoryFullException e) {
                 System.out.println(e.getMessage());
             } catch (EnemyNotFoundException e) {
@@ -30,11 +32,14 @@ public class Main {
         }
     }
 
-    private static boolean handleUserChoice (int choice, EnemyTree enemyTree) throws InventoryFullException, EnemyNotFoundException, SavegameException {
+    private static boolean handleUserChoice (int choice, GameState state) throws InventoryFullException, EnemyNotFoundException, SavegameException {
 
         switch (choice) {
             case 1:
                 //TODO: Spieler erstellen
+                System.out.println("Herzlichen Glückwunsch. Du erstellst einen Charakter! Wähle einen Namen:");
+                Player player = new Player();
+                state.setPlayer(player);
                 return true;
 
             case 2:
@@ -43,11 +48,12 @@ public class Main {
 
             case 3:
                 // TODO:  Gegner anzeigen (kann EnemyNotFoundException werfen)
-                enemyTree.printEnemies();
+                state.getEnemyTree().printEnemies();
                 return true;
 
             case 4:
                 //TODO: Spiel speichern (kann SavegameException werfen)
+                SavegameManager.save(state);
                 return true;
 
             case 5:

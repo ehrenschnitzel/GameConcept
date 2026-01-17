@@ -1,6 +1,8 @@
 package game;
 
-public class Enemy implements Comparable<Enemy> {
+import java.io.Serializable;
+
+public class Enemy implements Comparable<Enemy>, Serializable {
 
     private int level;
 

@@ -1,6 +1,10 @@
 package datastructures;
+import exceptions.EnemyNotFoundException;
 
-public class BinarySearchTree<T extends Comparable<T>> {
+import javax.xml.stream.events.EndElement;
+import java.io.Serializable;
+
+public class BinarySearchTree<T extends Comparable<T>> implements Serializable {
 
     private TreeNode<T> root;
 
@@ -22,9 +26,24 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
 
 
-    public T find(T data) {
-        // TODO: Rekursiv suchen
-        return null;
+    public T find(T data) throws EnemyNotFoundException {
+        return findRecursive(root, data);
+    }
+
+    private T findRecursive(TreeNode<T> current, T data) throws EnemyNotFoundException {
+        if (current == null) {
+            throw new EnemyNotFoundException(data + " gibt es nicht, versuchs nochmal!");
+        }
+
+        int cmp = data.compareTo(current.data);
+
+        if (cmp == 0) {
+            return current.data;
+        } else if (cmp < 0) {
+            return findRecursive(current.left, data);
+        } else {
+            return findRecursive(current.right, data);
+        }
     }
 
     public void printInOrder() {

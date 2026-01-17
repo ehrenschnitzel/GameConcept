@@ -1,9 +1,11 @@
 package game;
-
+//This is a Game-Wrapper
 import datastructures.BinarySearchTree;
 import exceptions.EnemyNotFoundException;
 
-public class EnemyTree {
+import java.io.Serializable;
+
+public class EnemyTree implements Serializable {
 
     private final BinarySearchTree<Enemy> tree = new BinarySearchTree<>();
 
@@ -12,7 +14,11 @@ public class EnemyTree {
     }
 
     public Enemy findEnemy(Enemy enemy) throws EnemyNotFoundException {
-        return tree.find(enemy);
+       try {
+           return tree.find(enemy);
+       } catch (EnemyNotFoundException e) {
+           throw new EnemyNotFoundException("Gegner mit Level" + enemy.getLevel() + " nicht gefunden!");
+       }
     }
     public void printEnemies() {
         tree.printInOrder();

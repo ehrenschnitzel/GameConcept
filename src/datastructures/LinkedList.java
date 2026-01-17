@@ -1,6 +1,8 @@
 package datastructures;
 
-public class LinkedList<T> {
+import java.io.Serializable;
+
+public class LinkedList<T> implements Serializable {
 
     private ListNode<T> head;
 
